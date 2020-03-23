@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/mcc_generated_files/**",
+                "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic18f46k22.*",
+                "C:/Program Files (x86)/Microchip/xc8/v2.10/pic/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Microchip/xc8/v2.10/bin/xc8-cc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

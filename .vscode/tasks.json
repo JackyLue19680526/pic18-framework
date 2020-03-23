@@ -1,0 +1,44 @@
+{
+// 如需 tasks.json 格式的文件， 
+    // 請參閱 https://go.microsoft.com/fwlink/?LinkId=733558
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "C:/Program Files (x86)/Microchip/MPLABX/v5.30/gnuBins/GnuWin32/bin/make",
+            "args": [
+                "build"
+            ],
+            "type": "shell",
+            "problemMatcher": [
+                "$go"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clean",
+            "command": "C:/Program Files (x86)/Microchip/MPLABX/v5.30/gnuBins/GnuWin32/bin/make",
+            "args": [
+                "clean"
+            ],
+            "type": "shell",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "programming",
+            "command": "C:/Program Files (x86)/Microchip/MPLABX/v5.30/mplab_platform/bin/mdb.bat",
+            "args": [
+                ".vscode/prog.cmd"
+            ],
+            "type": "shell",
+            "problemMatcher": [
+                "$go"
+            ]
+        }
+    ]
+}
