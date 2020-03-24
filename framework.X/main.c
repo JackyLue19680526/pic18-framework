@@ -19,6 +19,8 @@
 //----------- sub-module include ------------
 //#include "myTimeEvent.h"
 #include "secTimeEvent.h"
+#include "coreModel.h"
+#include "operation.h"
 
 //==============================================================================
 // Private Macros
@@ -32,26 +34,28 @@
 // Private (local) functions
 //==============================================================================
 
-void xxxx(void) {
-    DBT_printf("~~~~\n");
-}
+void xxxx(void) {DBT_printf("~~~~\n");}
 
 void Software_initial() {
-  // time-event initial
-  tEV_init();
-  // tEV.SetEventHandler_Run_1ms(xxxx, 0);
-  // tEV.SetEventHandler_Run_10ms(xxxx, 1);
-  // tEV.SetEventHandler_Run_10ms(xxxx, 0);
-  tEV.SetEventHandler_Run_100ms(xxxx, 0);
-  // tEV.SetEventHandler_Run_100ms(xxxx, 1);
-  // tEV.SetEventHandler_Run_1_sec(xxxx);
-  // tEV.SetEventHandler_Run_N_sec(xxxx);
+    //Core model & Operation 
+    cMdl_init();
+    iOp_init();
 
-  // ---- start ----
-  tEV.wait_T100ms(100); // some delay is must for first prinf().
-  DBT_printf("\n------------------\n");
-  DBT_printf("  UWB + AHRS Test \n");
-  DBT_printf("------------------\n");
+    // time-event initial
+    tEV_init();
+    // tEV.SetEventHandler_Run_1ms(xxxx, 0);
+    // tEV.SetEventHandler_Run_10ms(xxxx, 1);
+    // tEV.SetEventHandler_Run_10ms(xxxx, 0);
+    tEV.SetEventHandler_Run_100ms(xxxx, 0);
+    // tEV.SetEventHandler_Run_100ms(xxxx, 1);
+    // tEV.SetEventHandler_Run_1_sec(xxxx);
+    // tEV.SetEventHandler_Run_N_sec(xxxx);
+
+    // ---- start ----
+    tEV.wait_T100ms(2); // some delay before first prinf().
+    DBT_printf("\n------------------\n");
+    DBT_printf("  XXXX project Test \n");
+    DBT_printf("------------------\n");
 }
 
 /*******************************************************************************
@@ -59,43 +63,44 @@ void Software_initial() {
  ******************************************************************************
  */
 void main(void) {
-  // Initialize the device
-  SYSTEM_Initialize();
+    // Initialize the device
+    SYSTEM_Initialize();
 
-  // If using interrupts in PIC18 High/Low Priority Mode you need to enable the
-  // Global High and Low Interrupts If using interrupts in PIC Mid-Range
-  // Compatibility Mode you need to enable the Global and Peripheral Interrupts
-  // Use the following macros to:
+    // If using interrupts in PIC18 High/Low Priority Mode you need to enable the
+    // Global High and Low Interrupts If using interrupts in PIC Mid-Range
+    // Compatibility Mode you need to enable the Global and Peripheral Interrupts
+    // Use the following macros to:
 
-  // Enable the Global Interrupts
-  INTERRUPT_GlobalInterruptEnable();
+    // Enable the Global Interrupts
+    INTERRUPT_GlobalInterruptEnable();
 
-  // Disable the Global Interrupts
-  // INTERRUPT_GlobalInterruptDisable();
+    // Disable the Global Interrupts
+    // INTERRUPT_GlobalInterruptDisable();
 
-  // Enable the Peripheral Interrupts
-  INTERRUPT_PeripheralInterruptEnable();
+    // Enable the Peripheral Interrupts
+    INTERRUPT_PeripheralInterruptEnable();
 
-  // Disable the Peripheral Interrupts
-  // INTERRUPT_PeripheralInterruptDisable();
+    // Disable the Peripheral Interrupts
+    // INTERRUPT_PeripheralInterruptDisable();
 
-  // project SW module initial
-  Software_initial();
+    // project SW module initial
+    Software_initial();
 
-  DBT_printf("--- Loop start ---\n");
+    DBT_printf("--- Loop start ---\n");
 
-  while (tEV.resetMCU == false) {
-    // ------ For time event flags ------
-    #if CHECK_TIME_EV_IN_MAIN_LOOP == 1
-    tEV.checkInMainLoop();
-    #endif
-    
-    // TODO add job in main loop ...
-    
-    // unmark this when only a few job in loop
-    // tEV.delay_in_ms(1);
-  }
+    while (tEV.resetMCU == false) {
+        // ------ For time event flags ------
+        #if CHECK_TIME_EV_IN_MAIN_LOOP == 1
+        tEV.checkInMainLoop();
+        #endif
+
+        iOp.mainLoopTask();
+
+        // may add some delay when only a few job in loop
+        // tEV.delay_in_ms(1);
+        // tEV.wait_T100ms(1);
+    }
 }
 /**
  End of File
-*/
+ */

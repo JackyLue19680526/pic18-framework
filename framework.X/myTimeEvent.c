@@ -114,6 +114,7 @@ static void Runing_Nsec() {
 //Summary : Timer call-back for every 1ms
 //Return  : None
 static void timer_1ms_CallBack(void) {
+
     _Tmr1Count++;
        
     #if INCLUDE_SYSTEM_TIME_MS > 0
